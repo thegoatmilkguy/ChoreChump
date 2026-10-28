@@ -10,7 +10,8 @@ import {
   Flame,
   Lock,
   Unlock,
-  Wifi,
+  Sun,
+  Moon,
   X,
 } from 'lucide-react';
 import { AppState, Chore, Room, User } from './types';
@@ -33,6 +34,12 @@ export function App() {
     return saved ? Number(saved) : null;
   });
   const [isParentMode, setIsParentMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('chorechump_theme');
+    if (saved === 'dark') return true;
+    if (saved === 'light') return false;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+  });
   const [activeTab, setActiveTab] = useState<ActiveTab>('rooms');
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
   const [showTemplatesModal, setShowTemplatesModal] = useState(false);
@@ -65,6 +72,11 @@ export function App() {
       console.error('Failed to fetch ChoreChump state:', err);
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('chorechump_theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
   useEffect(() => {
     fetchState();
@@ -300,6 +312,20 @@ export function App() {
 
           {/* Right User Status & Parent Mode Switch */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Dark Mode Toggle Button */}
+            <button
+              onClick={() => setDarkMode((d) => !d)}
+              title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label="Toggle dark mode"
+              className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition"
+            >
+              {darkMode ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
+
             {/* Parent Mode Lock/Unlock Button */}
             <button
               onClick={() => {
