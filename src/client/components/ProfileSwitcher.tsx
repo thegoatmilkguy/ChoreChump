@@ -60,7 +60,7 @@ export function ProfileSwitcher({ users, onSelectUser }: ProfileSwitcherProps) {
             Who’s cleaning on <span className="text-amber-400">ChoreChump</span>?
           </h1>
           <p className="text-slate-300 text-base sm:text-lg">
-            Tap your profile to see what will make each room 100% clean!
+	  	Ok now Chump, you gotta do some chores!  Click your profile and get to work!
           </p>
         </div>
 
