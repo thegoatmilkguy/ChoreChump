@@ -1,0 +1,17 @@
+{
+  "name": "ChoreChump — Family Chore Tracker",
+  "short_name": "ChoreChump",
+  "description": "Organize family chores by room based on what will make each room clean.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

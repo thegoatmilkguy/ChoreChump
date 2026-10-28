@@ -1,0 +1,13 @@
+services:
+  chorechump:
+    build: .
+    container_name: chorechump
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CHORECHUMP_DATA_DIR=/data
+    volumes:
+      - ./data:/data
